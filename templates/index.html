@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Suggestions</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    
+    <section class="phoneContainer">
+        <div class="phoneScreen">
+
+            <!-- Div que aparecerá quando o modo edição não estiver ativo. -->
+            <div class="phoneFotoMode">
+
+                <!-- Botão Live Suggestions (Lupa) -->
+                <button></button>
+
+                <!-- Botão de Edição -->
+                <button>Teste</button>
+
+            </div> 
+            
+            <!-- Div que aparecerá quando o modo edição estiver ativo. -->
+            <div class="phoneEditionMode">
+                <!-- Seção Superior com os ícones de edição -->
+                <ul class="editionIconsContainer">
+                    <!-- Ao clicar um desses botões, o titulo correspondente será exibido no título -->
+                    <li class="editionIcons">Brilho</li>
+                    <li class="editionIcons">Contraste</li>
+                    <li class="editionIcons">Saturação</li>
+                    <li class="editionIcons">Temperatura</li>
+                    <li class="editionIcons">Matiz</li>
+                    <li class="editionIcons">Desfoque</li>
+                </ul>
+
+                <!-- Slider de edição, o qual atualiza o valor do filtro selecionado. -->
+                 <!-- O slider será completo de 100 divs (geradas através de um for no JS quando o site abrir)  -->
+                 <!-- O marcador tera position: absolute; e poderemos scrollar o slider com o scroll do mouse  -->
+                 <!-- O JS estará sempre checando qual div está sendo selecionada (detectada através da sobreposição com o marcador)  -->
+                 <!-- e então pegará o valor dessa div (por exemplo, a div 50 retorna o valor 50) e aplicará em tempo real no CSS  -->
+                 <!-- Além disso, a configuração específica que a IA sugerir será exibida na div específica, com a mudança de estilo  -->
+                <div class="editionSlider">
+                    <!-- Quando o Constraste estiver de acordo com a IA, o pop up amarelo dos icons sumirá -->
+                    <div class="editionMarcador"></div>
+                </div>
+
+                <div class="editionTitle">
+                    <!-- Aqui entrará o valor que foi clicado no editionIcons -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../static/js/script.js"></script>
+</body>
+</html>
