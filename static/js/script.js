@@ -12,6 +12,6 @@ document.querySelector("#drop-zone").addEventListener("drop", async (e) => {
     e.preventDefault()
     const resposta = await fetch("/", { method: "POST" }) // Envia um POST para o endpoint "/"
     const dados = await resposta.json() // a variável "dados" é uma variável auxiliar, que armazena a resposta do backend, convertida para JSON
-    console.log(dados.resposta)
+    console.log(dados.teste)
 })
 
