@@ -1,0 +1,11 @@
+.phoneContainer {
+    width: 300px;
+    height: 600px;
+    background-color: #000;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: red;
+}
