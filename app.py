@@ -1,13 +1,14 @@
-#TODOS OS COMENTÁRIOS FORAM FEITOS USANDO A EXTENSÃO "Better Comments" DO VSCODE, 
-#PARA EXPLICAR CADA PARTE DO CÓDIGO DE FORMA DETALHADA, É RECOMENDADO O USO DA EXTENSÃO PARA ENTENDIMENTO DO PROJETO.
+
+#* TODOS OS COMENTÁRIOS FORAM FEITOS USANDO A EXTENSÃO "Better Comments" DO VSCODE, 
+#* PARA EXPLICAR CADA PARTE DO CÓDIGO DE FORMA DETALHADA, É RECOMENDADO O USO DA EXTENSÃO PARA ENTENDIMENTO DO PROJETO.
 
 #Importando as bibliotecas necessárias
 from flask import Flask, request, jsonify, render_template
 from google import genai
+from dotenv import load_dotenv
 import json
 import base64
 import os
-from dotenv import load_dotenv
 
 load_dotenv()
 app = Flask(__name__)
@@ -17,10 +18,6 @@ client = genai.Client(api_key=os.getenv("GEMINI_API_KEY")) #Substitui a real cha
 @app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")
-
-# @app.route("/", methods=["POST"])
-# def iaRequest():
-#     return jsonify({"resposta": "Conexao funcionando! (console.log)"})
 
 #*Quando o usuário enviar um POST para "/", chama a função abaixo, 
 #que gera uma resposta usando o modelo Gemini e retorna a resposta em formato JSON
@@ -55,13 +52,28 @@ def iaRequest():
                         #Seção 2 do prompt, onde damos as instruções para o Gemini responder apenas com JSON, sem nenhum texto adicional
                         "text": 
                             """
-                            Leia e entenda a imagem enviada. Na seção "valores do JSON, escreva, com poucas palavras, o que você entendeu da imagem.
-                            Retorne APENAS um JSON válido, sem nenhum texto adicional, sem explicações, sem markdown, sem ```json. 
-                            Neste formato exato (exceto na secão "valores", onde você deve escrever o que entendeu da imagem):
+                            Você é um especialista em edição de fotografia. Analise a imagem enviada e retorno um JSON indicando 
+                            quais alterações são necessárias para melhorar a qualidade da imagem, e quais não são necessárias.
+                            Retorne APENAS um JSON válido, sem nenhum texto adicional, sem explicações, sem markdown, sem ```json.
+                            Neste formato exato:
+                            
                             {
-                                "teste": "Conexao funcionando! (Google Gemini, com JSON e reconhecimento de foto)",
-                                "valores": ""
+                              "alteracoes": {
+                                "brilho":      { "precisa": true,  "valor": 60 },
+                                "contraste":   { "precisa": true,  "valor": 45 },
+                                "saturacao":   { "precisa": false, "valor": 0  },
+                                "temperatura": { "precisa": false, "valor": 0  },
+                                "matiz":       { "precisa": false, "valor": 0  },
+                                "desfoque":    { "precisa": false, "valor": 0  },
+                                "vinheta":     { "precisa": false, "valor": 0  }
+                              }
                             }
+                            
+                            Regras:
+                            - "precisa" é true somente se a imagem realmente precisa dessa alteração
+                            - "valor" vai de 0 a 100
+                            - Se "precisa" for false, "valor" deve ser 0
+                            - Retorne APENAS o JSON, sem explicações
                             """
                     }
                 ]
@@ -80,4 +92,3 @@ def iaRequest():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
-        
