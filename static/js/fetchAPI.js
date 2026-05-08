@@ -45,8 +45,6 @@ document.querySelector("#drop-zone").addEventListener("drop", async (e) => {
             // Por exemplo, se a IA sugeriu que o brilho precisa ser 60, então filtrosImagem["brilho"] será atualizado para 60
         }
     })
-
-    console.log(filtrosImagem) // Imprime no console as alterações sugeridas pela IA, para verificar se estão corretas
 })
 
 //? Ao fim deste arquivo, a variável "filtrosImagem" estará atualizada com os valores sugeridos pela IA, 

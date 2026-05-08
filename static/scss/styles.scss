@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.phoneContainer {
+    width: 400px;
+    height: 700px;
+    background-color: #000;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: red;
+    overflow: hidden;
+
+    .phoneScreen {
+        width: 100%;
+    }
+}
+
+
+.phoneEditionMode {
+    width: 100%;
+}
+
+.editionSlider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+
+    .editionSliderLinha {
+        width: 1.5px;
+        height: 30px;
+        background: grey;
+        border-radius: 1px;
+    }
+
+    .linhaMedia {
+        height: 48px;
+        background: white;
+    }
+
+    .linhaGrande {
+        height: 64px;
+        background: yellow;
+    }
+
+    .editionMarcador {
+        position: absolute;
+    }
+}
