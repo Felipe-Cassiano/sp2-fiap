@@ -10,6 +10,7 @@
     
     <!-- Container principal do telefone, que atuará também como drop-zone -->
     <section class="phoneContainer" id="drop-zone">
+        <div class="phoneBg"></div>
         <div class="phoneScreen">
 
             <!-- Div que aparecerá quando o modo edição não estiver ativo. -->
@@ -42,10 +43,13 @@
                  <!-- O JS estará sempre checando qual div está sendo selecionada (detectada através da sobreposição com o marcador)  -->
                  <!-- e então pegará o valor dessa div (por exemplo, a div 50 retorna o valor 50) e aplicará em tempo real no CSS  -->
                  <!-- Além disso, a configuração específica que a IA sugerir será exibida na div específica, com a mudança de estilo  -->
-                <div class="editionSlider">
+                  <div class="wrapper">
+                    <div class="editionSlider">
                     <!-- Quando o Constraste estiver de acordo com a IA, o pop up amarelo dos icons sumirá -->
+                    </div>
                     <div class="editionMarcador"></div>
                 </div>
+                
 
                 <div class="editionTitle">
                     <!-- Aqui entrará o valor que foi clicado no editionIcons -->

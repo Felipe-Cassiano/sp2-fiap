@@ -8,6 +8,15 @@ body {
     background-color: #f0f0f0;
 }
 
+.phoneBg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    border-radius: 30px;
+}
+
 .phoneContainer {
     width: 400px;
     height: 700px;
@@ -18,7 +27,6 @@ body {
     align-items: center;
     position: relative;
     background-color: red;
-    overflow: hidden;
 
     .phoneScreen {
         width: 100%;
@@ -28,17 +36,24 @@ body {
 
 .phoneEditionMode {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .editionSlider {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+    gap: 0;
     width: 100%;
-
+    height: 80px;
+    overflow: hidden;
+    
     .editionSliderLinha {
-        width: 1.5px;
+        margin: 0 3px;
+        min-width: 1.5px;
         height: 30px;
         background: grey;
         border-radius: 1px;
@@ -53,8 +68,21 @@ body {
         height: 64px;
         background: yellow;
     }
+}
 
-    .editionMarcador {
-        position: absolute;
-    }
+.editionMarcador {
+    position: absolute;
+    width: 2px;
+    height: 64px;
+    background: white;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    height: 100%;
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
 }
