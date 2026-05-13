@@ -64,8 +64,7 @@ def iaRequest():
                                 "saturacao":   { "precisa": false, "valor": 0  },
                                 "temperatura": { "precisa": false, "valor": 0  },
                                 "matiz":       { "precisa": false, "valor": 0  },
-                                "desfoque":    { "precisa": false, "valor": 0  },
-                                "vinheta":     { "precisa": false, "valor": 0  }
+                                "desfoque":    { "precisa": false, "valor": 0  }
                               }
                             }
                             
@@ -86,7 +85,6 @@ def iaRequest():
     texto_resposta = resposta.text #* Python retorna apenas a parte "text", não importando a parte da imagem, que é a parte "inline_data"
     texto_resposta = texto_resposta.replace("```json", "").replace("```", "").strip() #* Remove as marcações de código e espaços extras
 
-    print("Resposta do Gemini:", texto_resposta) # Imprime a resposta bruta do Gemini para depuração
     dados = json.loads(texto_resposta)
     return jsonify(dados)
 

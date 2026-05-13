@@ -1,11 +1,97 @@
-.phoneContainer {
-    width: 300px;
-    height: 600px;
-    background-color: #000;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    background-color: red;
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
 }
+
+.phoneBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  border-radius: 30px;
+}
+
+.phoneContainer {
+  width: 400px;
+  height: 700px;
+  background-color: #000;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: red;
+}
+.phoneContainer .phoneScreen {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.phoneEditionMode {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.phoneEditionMode .editionIconsContainer {
+  z-index: 2;
+}
+.phoneEditionMode .editionTitle {
+  position: relative;
+  color: white;
+  background: black;
+  font-size: 20px;
+  z-index: 10;
+}
+
+.editionSlider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  height: 80px;
+  overflow: hidden;
+}
+.editionSlider .editionSliderLinha {
+  margin: 0 3px;
+  min-width: 1.5px;
+  height: 30px;
+  background: grey;
+  border-radius: 1px;
+}
+.editionSlider .linhaMedia {
+  height: 48px;
+  background: white;
+}
+.editionSlider .linhaGrande {
+  height: 64px;
+  background: yellow;
+}
+
+.editionMarcador {
+  position: absolute;
+  width: 2px;
+  height: 64px;
+  background: white;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  height: 100%;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/*# sourceMappingURL=styles.css.map */

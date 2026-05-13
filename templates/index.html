@@ -10,6 +10,7 @@
     
     <!-- Container principal do telefone, que atuará também como drop-zone -->
     <section class="phoneContainer" id="drop-zone">
+        <div class="phoneBg"></div>
         <div class="phoneScreen">
 
             <!-- Div que aparecerá quando o modo edição não estiver ativo. -->
@@ -28,12 +29,12 @@
                 <!-- Seção Superior com os ícones de edição -->
                 <ul class="editionIconsContainer">
                     <!-- Ao clicar um desses botões, o titulo correspondente será exibido no título -->
-                    <li class="editionIcons">Brilho</li>
-                    <li class="editionIcons">Contraste</li>
-                    <li class="editionIcons">Saturação</li>
-                    <li class="editionIcons">Temperatura</li>
-                    <li class="editionIcons">Matiz</li>
-                    <li class="editionIcons">Desfoque</li>
+                    <li class="editionIcons" data-filtro="brilho">Brilho</li>
+                    <li class="editionIcons" data-filtro="contraste">Contraste</li>
+                    <li class="editionIcons" data-filtro="saturacao">Saturação</li>
+                    <li class="editionIcons" data-filtro="temperatura">Temperatura</li>
+                    <li class="editionIcons" data-filtro="matiz">Matiz</li>
+                    <li class="editionIcons" data-filtro="desfoque">Desfoque</li>
                 </ul>
 
                 <!-- Slider de edição, o qual atualiza o valor do filtro selecionado. -->
@@ -42,10 +43,13 @@
                  <!-- O JS estará sempre checando qual div está sendo selecionada (detectada através da sobreposição com o marcador)  -->
                  <!-- e então pegará o valor dessa div (por exemplo, a div 50 retorna o valor 50) e aplicará em tempo real no CSS  -->
                  <!-- Além disso, a configuração específica que a IA sugerir será exibida na div específica, com a mudança de estilo  -->
-                <div class="editionSlider">
+                  <div class="wrapper">
+                    <div class="editionSlider">
                     <!-- Quando o Constraste estiver de acordo com a IA, o pop up amarelo dos icons sumirá -->
+                    </div>
                     <div class="editionMarcador"></div>
                 </div>
+                
 
                 <div class="editionTitle">
                     <!-- Aqui entrará o valor que foi clicado no editionIcons -->
