@@ -29,7 +29,9 @@ body {
   background-color: red;
 }
 .phoneContainer .phoneScreen {
+  position: relative;
   width: 100%;
+  z-index: 1;
 }
 
 .phoneEditionMode {
@@ -37,6 +39,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.phoneEditionMode .editionIconsContainer {
+  z-index: 2;
+}
+.phoneEditionMode .editionTitle {
+  position: relative;
+  color: white;
+  background: black;
+  font-size: 20px;
+  z-index: 10;
 }
 
 .editionSlider {

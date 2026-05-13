@@ -64,8 +64,7 @@ def iaRequest():
                                 "saturacao":   { "precisa": false, "valor": 0  },
                                 "temperatura": { "precisa": false, "valor": 0  },
                                 "matiz":       { "precisa": false, "valor": 0  },
-                                "desfoque":    { "precisa": false, "valor": 0  },
-                                "vinheta":     { "precisa": false, "valor": 0  }
+                                "desfoque":    { "precisa": false, "valor": 0  }
                               }
                             }
                             

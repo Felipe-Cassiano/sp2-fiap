@@ -4,56 +4,71 @@
 document.addEventListener("DOMContentLoaded", () => {
     const slider = document.querySelector(".editionSlider")
     const marcador = document.querySelector(".editionMarcador")
+    const larguraLinha = 7.5
+    let posicaoAtual = 0
+    let linha0
+    let filtroAtivo = "brilho" // filtro ativo inicial
 
-    //Loop que cria as linhas do slider, de 0 a 100, e adiciona uma classe diferente para as linhas que são múltiplos de 10 e 5,
-    //para facilitar a visualização do usuário
+    // cria as linhas
     for (let i = 0; i <= 100; i++) {
         const linha = document.createElement("div")
         linha.classList.add("editionSliderLinha")
         linha.dataset.valor = i
 
-        //Adiciona um estilo diferente para as linhas que são múltiplos de 10 e 5
         if (i % 10 === 0) { linha.classList.add("linhaGrande") }
         else if (i % 5 === 0) { linha.classList.add("linhaMedia") }
 
-        //Adiciona a linha ao slider
         slider.appendChild(linha)
     }
 
-    function atualizarFiltro() {
-    const valor = pegarValorAtual()
-    document.querySelector(".phoneBg").style.filter = `brightness(${valor / 50})`
-    }
+    // referência da linha 0
+    linha0 = document.querySelector(".editionSliderLinha[data-valor='0']")
 
-    
+    // limites de posição
+    const posicaoMin = -(linha0.offsetLeft + 100 * larguraLinha) + slider.offsetWidth / 2
+    const posicaoMax = -(linha0.offsetLeft + 0 * larguraLinha) + slider.offsetWidth / 2
+
+    // posiciona o slider com a linha 50 no centro
+    posicaoAtual = -(linha0.offsetLeft + 50 * larguraLinha) + slider.offsetWidth / 2
+    slider.style.transform = `translateX(${posicaoAtual}px)`
 
     function pegarValorAtual() {
-        const transform = slider.style.transform
-        const posicaoAtual = parseFloat(transform.replace("translateX(", "").replace("px)", "") || 0)
-
-        const larguraLinha = 8  
-        const totalLargura = 101 * larguraLinha
-        const centro = slider.offsetWidth / 2
-
-        const valor = Math.round((centro - posicaoAtual) / larguraLinha)
-        return Math.max(0, Math.min(100, valor))  // limita entre 0 e 100
+        const valor = Math.round((-posicaoAtual + slider.offsetWidth / 2 - linha0.offsetLeft) / larguraLinha)
+        return Math.max(0, Math.min(100, valor))
     }
-    
+
+    function atualizarFiltro() {
+        const valor = pegarValorAtual()
+        filtrosImagem[filtroAtivo] = valor  // ← usa o filtros do fetchAPI.js diretamente
+        
+        document.querySelector(".editionTitle").textContent = filtroAtivo.toUpperCase()
+
+        document.querySelector(".phoneBg").style.filter = `
+            brightness(${filtrosImagem.brilho / 50})
+            contrast(${filtrosImagem.contraste / 50})
+            saturate(${filtrosImagem.saturacao / 50})
+            hue-rotate(${(filtrosImagem.matiz - 50) * 3.6}deg)
+            blur(${filtrosImagem.desfoque / 10}px)
+        `
+    }
+
     slider.addEventListener("wheel", (e) => {
         e.preventDefault()
-        
-        // move o slider
-        const posicaoAtual = parseFloat(slider.style.transform.replace("translateX(", "").replace("px)", "") || 0)
+
         const novaPosicao = posicaoAtual + e.deltaY * -0.03
-        
-        // pega o valor da linha sob o marcador
-        const valor = pegarValorAtual()
-        console.log(valor)
-        
-        slider.style.transform = `translateX(${novaPosicao}px)`
-        atualizarFiltro(pegarValorAtual())
+        posicaoAtual = Math.max(posicaoMin, Math.min(posicaoMax, novaPosicao))
+
+        slider.style.transform = `translateX(${posicaoAtual}px)`
+        atualizarFiltro()
+    })
+
+
+    //* ── ÍCONES ──
+
+    document.querySelectorAll(".editionIcons").forEach(icone => {
+        icone.addEventListener("click", () => {
+            filtroAtivo = icone.dataset.filtro
+            document.querySelector(".editionTitle").textContent = filtroAtivo.toUpperCase()
+        })
     })
 })
-
-//TODO Não permitir que o slider seja movido para além das linhas, ou seja, que o valor seja sempre entre 0 e 100
-//TODO Adicionar a função de alterar o filtro que está selecionado

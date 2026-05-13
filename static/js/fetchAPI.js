@@ -9,7 +9,6 @@ const filtrosImagem = {
     temperatura: 50,
     matiz:       50,
     desfoque:     0,
-    vinheta:      0,
 }
 
 const container = document.querySelector("#drop-zone")
