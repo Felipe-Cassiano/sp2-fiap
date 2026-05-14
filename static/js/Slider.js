@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     slider.addEventListener("wheel", (e) => {
         e.preventDefault()
 
-        const novaPosicao = posicaoAtual + e.deltaY * -0.03
+        const novaPosicao = posicaoAtual + e.deltaY * -0.01
         posicaoAtual = Math.max(posicaoMin, Math.min(posicaoMax, novaPosicao))
 
         slider.style.transform = `translateX(${posicaoAtual}px)`
@@ -69,6 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
         icone.addEventListener("click", () => {
             filtroAtivo = icone.dataset.filtro
             document.querySelector(".editionTitle").textContent = filtroAtivo.toUpperCase()
+
+            document.querySelectorAll(".linhaDestaque").forEach(l => l.classList.remove("linhaDestaque"))
+
+            const valorSugerido = filtrosImagem[filtroAtivo]
+            const linha = document.querySelector(`.editionSliderLinha[data-valor="${valorSugerido}"]`)
+            if (linha) linha.classList.add("linhaDestaque")
         })
     })
 })
