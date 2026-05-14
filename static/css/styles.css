@@ -40,6 +40,9 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.phoneEditionMode .iconeDestaque {
+  background-color: yellow;
+}
 .phoneEditionMode .editionIconsContainer {
   z-index: 2;
 }
@@ -60,6 +63,9 @@ body {
   width: 100%;
   height: 80px;
   overflow: hidden;
+}
+.editionSlider .linhaDestaque {
+  background: red !important;
 }
 .editionSlider .editionSliderLinha {
   margin: 0 3px;

@@ -47,8 +47,14 @@ container.addEventListener("drop", async (e) => {
             filtrosImagem[chave] = valor.valor 
             // Atualiza o valor do filtro correspondente na variável "filtrosImagem" com o valor sugerido pela IA
             // Por exemplo, se a IA sugeriu que o brilho precisa ser 60, então filtrosImagem["brilho"] será atualizado para 60
+            document.querySelector(`[data-filtro="${chave}"]`).classList.add("iconeDestaque")
+
+            const linhaDestaque = document.querySelector(`.editionSliderLinha[data-valor="${valor.valor}"]`)
+            linhaDestaque.classList.add("linhaDestaque")
         }
     })
+
+    console.log(filtrosImagem)
 })
 
 //? Ao fim deste arquivo, a variável "filtrosImagem" estará atualizada com os valores sugeridos pela IA, 
