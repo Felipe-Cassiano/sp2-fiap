@@ -7,23 +7,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const larguraLinha = 7.5
     let posicaoAtual = 0
     let linha0
-    let filtroAtivo = "brilho" 
+    let filtroAtivo = "brilho" // filtro ativo inicial
 
+    // cria as linhas
     for (let i = 0; i <= 100; i++) {
         const linha = document.createElement("div")
         linha.classList.add("editionSliderLinha")
         linha.dataset.valor = i
 
         if (i % 10 === 0) { linha.classList.add("linhaGrande") }
+        else if (i % 5 === 0) { linha.classList.add("linhaMedia") }
 
         slider.appendChild(linha)
     }
 
+    // referência da linha 0
     linha0 = document.querySelector(".editionSliderLinha[data-valor='0']")
 
+    // limites de posição
     const posicaoMin = -(linha0.offsetLeft + 100 * larguraLinha) + slider.offsetWidth / 2
     const posicaoMax = -(linha0.offsetLeft + 0 * larguraLinha) + slider.offsetWidth / 2
 
+    // posiciona o slider com a linha 50 no centro
     posicaoAtual = -(linha0.offsetLeft + 50 * larguraLinha) + slider.offsetWidth / 2
     slider.style.transform = `translateX(${posicaoAtual}px)`
 
@@ -34,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function atualizarFiltro() {
         const valor = pegarValorAtual()
-        filtrosImagem[filtroAtivo] = valor  
+        filtrosImagem[filtroAtivo] = valor  // ← usa o filtros do fetchAPI.js diretamente
         
         document.querySelector(".editionTitle").textContent = filtroAtivo.toUpperCase()
 
@@ -45,10 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
             hue-rotate(${(filtrosImagem.matiz - 50) * 3.6}deg)
             blur(${filtrosImagem.desfoque / 10}px)
         `
-
-        if (filtrosImagem[filtroAtivo] !== null && valor === filtrosImagem[filtroAtivo]) {
-            document.querySelector(`[data-filtro="${filtroAtivo}"]`).classList.remove("iconeDestaque")
-        }
     }
 
     slider.addEventListener("wheel", (e) => {
@@ -61,6 +62,30 @@ document.addEventListener("DOMContentLoaded", () => {
         atualizarFiltro()
     })
 
+    let isDragging = false
+    let startX = 0
+    let startPosicao = 0
+    
+    slider.addEventListener("mousedown", (e) => {
+        isDragging = true
+        startX = e.clientX
+        startPosicao = posicaoAtual
+    })
+    
+    document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return
+        
+        const diff = e.clientX - startX
+        const novaPosicao = startPosicao + diff
+        posicaoAtual = Math.max(posicaoMin, Math.min(posicaoMax, novaPosicao))
+        
+        slider.style.transform = `translateX(${posicaoAtual}px)`
+        atualizarFiltro()
+    })
+    
+    document.addEventListener("mouseup", () => {
+        isDragging = false
+    })
 
     //* ── ÍCONES ──
 
