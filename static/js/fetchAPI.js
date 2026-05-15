@@ -13,22 +13,17 @@ const filtrosImagem = {
 
 const container = document.querySelector("#drop-zone")
 
-// * As duas funções foram separadas pois uma será acionada ao passar a imagem por cima do container, 
-// * mas a outra apenas quando a imagem é dropada
+// ! FUNÇÃO PRINCIPAL: processarImagem
+// ! Essa função é responsável por processar a imagem que foi dropada ou selecionada, 
+// ! enviando-a para o backend e recebendo as alterações sugeridas pela IA, 
+// ! que são então aplicadas na variável "filtrosImagem" e destacadas no slider e nos ícones
+async function processarImagem(arquivoImagem) {
+    document.querySelector(`.phoneContainer`).style.backgroundColor = "transparent" // Deixa o fundo do container transparente
 
-//Função acionada quando a imagem é passada por cima do container, para impedir o comportamento padrão do navegador, que é abrir a imagem em uma nova aba
-container.addEventListener("dragover", async (e) => {
-    e.preventDefault() // Previne o comportamento padrão do navegador, que é abrir a imagem em uma nova aba
-})
-
-container.addEventListener("drop", async (e) => {
-    e.preventDefault() // Previne o comportamento padrão do navegador, que é abrir a imagem em uma nova aba
-
-    const fotoDropada = e.dataTransfer.files[0] // A variável "arquivo" é a primeira imagem que foi dropada no container
     const formData = new FormData() // A variável "formData" é uma variável auxiliar, que armazena os dados que serão enviados para o backend
-    formData.append("arquivo", fotoDropada) // Adiciona a imagem ao formData, com o nome "arquivo"
+    formData.append("arquivo", arquivoImagem) // Adiciona a imagem ao formData, com o nome "arquivo"
 
-    const url = URL.createObjectURL(fotoDropada) // A variável "url" é a URL da imagem que foi dropada, criada a partir do arquivo
+    const url = URL.createObjectURL(arquivoImagem) // A variável "url" é a URL da imagem que foi dropada, criada a partir do arquivo
     document.querySelector(".phoneBg").style.backgroundImage = `url(${url})`
 
     //* fetch na API que envia a imagem e recebe a resposta do backend, que é a leitura da IA da imagem
@@ -48,14 +43,37 @@ container.addEventListener("drop", async (e) => {
             // Atualiza o valor do filtro correspondente na variável "filtrosImagem" com o valor sugerido pela IA
             // Por exemplo, se a IA sugeriu que o brilho precisa ser 60, então filtrosImagem["brilho"] será atualizado para 60
             document.querySelector(`[data-filtro="${chave}"]`).classList.add("iconeDestaque")
-
+        
             const linhaDestaque = document.querySelector(`.editionSliderLinha[data-valor="${valor.valor}"]`)
             linhaDestaque.classList.add("linhaDestaque")
         }
     })
+}
 
-    console.log(filtrosImagem)
+// ? Chamada da função "processarImagem" quando a imagem é dropada no container
+// * As duas funções foram separadas pois uma será acionada ao passar a imagem por cima do container, 
+// * mas a outra apenas quando a imagem é dropada
+container.addEventListener("dragover", async (e) => {
+    e.preventDefault() // Previne o comportamento padrão do navegador, que é abrir a imagem em uma nova aba
 })
+container.addEventListener("drop", async (e) => {
+    e.preventDefault() // Previne o comportamento padrão do navegador, que é abrir a imagem em uma nova aba
+    processarImagem(e.dataTransfer.files[0]) // Chama a função "processarImagem" passando o arquivo da imagem que foi dropada, que é o primeiro arquivo da lista de arquivos dropados (e.dataTransfer.files[0])
+})
+
+// ? Chamada da função "processarImagem" quando a imagem é selecionada através do input de arquivo
+document.querySelector('#btnImagem').addEventListener("click", () => {
+        document.querySelector("#inputImagem").click()
+})
+
+document.querySelector("#inputImagem").addEventListener("change", (e) => {
+    if (!e.target.files[0]) return
+    processarImagem(e.target.files[0]) // Chama a função "processarImagem" passando o arquivo da imagem que foi selecionada, que é o primeiro arquivo da lista de arquivos selecionados (e.target.files[0])
+})
+
+
+
+
 
 //? Ao fim deste arquivo, a variável "filtrosImagem" estará atualizada com os valores sugeridos pela IA, 
 //? e poderá ser utilizada para sugerir as alterações no slider

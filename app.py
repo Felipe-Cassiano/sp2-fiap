@@ -70,7 +70,7 @@ def iaRequest():
                             
                             Regras:
                             - "precisa" é true somente se a imagem realmente precisa dessa alteração
-                            - "valor" vai de 0 a 100
+                            - "valor" vai de 0 a 100, sendo 50 o valor normal, sem alterações (EXCETO DESFOQUE, que o valor começa em 0, sem desfoque, e vai aumentando conforme o desfoque necessário aumenta)
                             - Se "precisa" for false, "valor" deve ser 0
                             - Retorne APENAS o JSON, sem explicações
                             """

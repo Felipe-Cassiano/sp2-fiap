@@ -4,38 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Suggestions</title>
-    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/stylesGerais.css">
+    <link rel="stylesheet" href="../static/css/stylesPhone.css">
 </head>
 <body>
+    <section class="headerGradient"></section>
     
+    <img src="../static/images/tuxlabs.png" alt="" id="imgTuxLabs">
+
     <!-- Container principal do telefone, que atuará também como drop-zone -->
     <section class="phoneContainer" id="drop-zone">
+        <input type="file" id="inputImagem" accept="image/*" style="display: none">
         <div class="phoneBg"></div>
         <div class="phoneScreen">
-
-            <!-- Div que aparecerá quando o modo edição não estiver ativo. -->
-            <div class="phoneFotoMode">
-
-                <!-- Botão Live Suggestions (Lupa) -->
-                <button></button>
-
-                <!-- Botão de Edição -->
-                <button>Teste</button>
-
-            </div> 
             
             <!-- Div que aparecerá quando o modo edição estiver ativo. -->
-            <div class="phoneEditionMode">
+            <ul class="editionIconsContainer">
                 <!-- Seção Superior com os ícones de edição -->
-                <ul class="editionIconsContainer">
-                    <!-- Ao clicar um desses botões, o titulo correspondente será exibido no título -->
-                    <li class="editionIcons" data-filtro="brilho">Brilho</li>
-                    <li class="editionIcons" data-filtro="contraste">Contraste</li>
-                    <li class="editionIcons" data-filtro="saturacao">Saturação</li>
-                    <li class="editionIcons" data-filtro="temperatura">Temperatura</li>
-                    <li class="editionIcons" data-filtro="matiz">Matiz</li>
-                    <li class="editionIcons" data-filtro="desfoque">Desfoque</li>
-                </ul>
+                <!-- Ao clicar um desses botões, o titulo correspondente será exibido no título -->
+                <li class="editionIcons" data-filtro="brilho"><img src="../static/images/brilho.png" alt=""></li>
+                <li class="editionIcons" data-filtro="contraste"><img src="../static/images/contraste.png" alt=""></li>
+                <li class="editionIcons" data-filtro="saturacao"><img src="../static/images/saturacao.png" alt=""></li>
+                <li class="editionIcons" data-filtro="temperatura"><img src="../static/images/temperatura.png" alt=""></li>
+                <li class="editionIcons" data-filtro="matiz"><img src="../static/images/matiz.png" alt=""></li>
+                <li class="editionIcons" data-filtro="desfoque"><img src="../static/images/desfoque.png" alt=""></li>
+            </ul>
+
+            <div class="phoneEditionMode">
 
                 <!-- Slider de edição, o qual atualiza o valor do filtro selecionado. -->
                  <!-- O slider será completo de 100 divs (geradas através de um for no JS quando o site abrir)  -->
@@ -57,7 +52,19 @@
             </div>
         </div>
     </section>
+    
+    <section class="textContainer">
+        <h1>Live Suggestions</h1>
+        <p>Ao dropar a imagem, as sugestões em tempo real serão exibidas na interface do celular, indicadas por pop-ups amarelos. Com isso, o usuário pode, de forma dinâmica, alterar as configurações de filtro. </p>
+        <p>Dessa forma, o usuário é convidado a embarcar em uma experiência não apenas visual, mas também interativa.</p>
+        <p>Para começar, basta dropar uma imagem no container do telefone, ou clicar nele, abrindo seu explorador de arquivos! Após isso, espere alguns segundos para a IA analisar!</p>
+        <p>Ou clique no botâo abaixo!</p>
+        <button id="btnImagem">Selecionar Imagem</button>
+    </section>
 
+    <section class="footerGradient"></section>
+
+    <script src="../static/js/icons.js"></script>
     <script src="../static/js/fetchAPI.js"></script>
     <script src="../static/js/Slider.js"></script>
 </body>

@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    height: 100vh;
+    background-color: black;
+}
+
+#imgTuxLabs {
+    width: 250px;
+}
+
+.textContainer {
+    max-width: 250px;
+    h1 {
+        background: linear-gradient(90deg, #478cf6, #c1e1ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+
+    p {
+        color: white;
+    }
+
+    #btnImagem {
+        padding: 10px 30px;
+        border-radius: 50px;
+        background-color: white;
+        color: black;
+        font-size: 20px;
+        transition: all 0.5 ease-in-out;
+
+        :hover {
+            cursor: pointer;
+            transform: scale(1.01);
+        }
+    }
+}
+
+.headerGradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(180deg, hsl(216, 91%, 62%, .25), transparent);
+    z-index: -1;
+}
+
+.footerGradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(0, hsl(216, 91%, 62%, .25), transparent);
+    z-index: -1;
+}
